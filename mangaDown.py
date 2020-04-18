@@ -7,9 +7,10 @@ from selenium import webdriver
 baseUrl = 'https://kissmanga.com/Manga/'    
 os.makedirs('manga', exist_ok=True)    # store comics in ./manga
 
-def downloadManga(mangaName):
+def downloadManga(mangaName, create_pdf, create_cbz):
     os.chdir('manga')
-    os.makedirs(mangaName.split('/')[0], exist_ok=True) 
+    base_filename = mangaName.split("/")[0]
+    os.makedirs(base_filename, exist_ok=True) 
     # Download the page.
     print('Downloading page %s...' % baseUrl+mangaName)
     browser = webdriver.Firefox()
@@ -23,7 +24,6 @@ def downloadManga(mangaName):
         print('Could not find comic images.')
     else:
         j=1
-        base_filename = mangaName.split("/")[0]
         k=1
         for i in eles:
             if(j == (len(eles)/2)+1):
@@ -34,18 +34,19 @@ def downloadManga(mangaName):
             print('Downloading image %s...' % (comicUrl))
             res = requests.get(comicUrl)
             res.raise_for_status()
-            imageFile = open(os.path.join(mangaName.split('/')[0], os.path.basename(base_filename + "_" + str(k) + '.jpg')),'wb')
+            imageFile = open(os.path.join(base_filename, os.path.basename(base_filename + "_" + str(k) + '.jpg')),'wb')
             k += 1
             for chunk in res.iter_content(100000):
                 imageFile.write(chunk)
             imageFile.close()
 
     #creating a pdf
-    os.chdir(mangaName.split('/')[0])
-    with open(mangaName.split('/')[0]+".pdf", "wb") as f:
-        f.write(img2pdf.convert([i for i in os.listdir('.') if i.endswith(".jpg")]))       
+    os.chdir(base_filename)
+    dl_file_list = [i for i in os.listdir('.') if i.endswith(".jpg")]
+    with open(base_filename+".pdf", "wb") as f:
+        f.write(img2pdf.convert(dl_file_list))       
     print('Done')   
 
 name = input('Enter manga name and chapter no. in kissmanga format: ')
 #eg - Hajime-no-Ippo/Ch-1239----In-His-Hand
-downloadManga(name)
+downloadManga(name, False, False)
