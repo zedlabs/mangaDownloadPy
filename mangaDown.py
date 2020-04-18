@@ -25,14 +25,14 @@ def downloadManga(mangaName, create_pdf, create_cbz):
         print("Could not find comic images.")
     else:
         j = 1
-        k = 1
+        file_number = 1
         for i in eles:
             if j == (len(eles) / 2) + 1:
                 break
             comicUrl = i.find_element_by_xpath(
                 "/html/body/div[1]/div[4]/div[11]/p[" + str(j) + "]/img"
             ).get_attribute("src")
-            j = j + 1
+            j += 1
             # Download the image.
             print("Downloading image %s..." % (comicUrl))
             res = requests.get(comicUrl)
@@ -40,11 +40,11 @@ def downloadManga(mangaName, create_pdf, create_cbz):
             imageFile = open(
                 os.path.join(
                     base_filename,
-                    os.path.basename(base_filename + "-" + str(k) + ".jpg"),
+                    os.path.basename(base_filename + "-" + str(file_number) + ".jpg"),
                 ),
                 "wb",
             )
-            k += 1
+            file_number += 1
             for chunk in res.iter_content(100000):
                 imageFile.write(chunk)
             imageFile.close()
