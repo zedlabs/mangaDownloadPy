@@ -10,7 +10,7 @@ def downloadManga(mangaName, create_pdf, create_cbz):
     baseUrl = "https://kissmanga.com/Manga/"
     os.makedirs("manga", exist_ok=True)
     os.chdir("manga")
-    base_filename = mangaName.replace("/","-")
+    base_filename = mangaName.replace("/", "-")
     os.makedirs(base_filename, exist_ok=True)
     # Download the page.
     print("Downloading page %s..." % baseUrl + mangaName, end="")
