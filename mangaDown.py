@@ -13,11 +13,11 @@ def downloadManga(mangaName, create_pdf, create_cbz):
     base_filename = mangaName.split("/")[0]
     os.makedirs(base_filename, exist_ok=True)
     # Download the page.
-    print("Downloading page %s..." % baseUrl + mangaName)
+    print("Downloading page %s..." % baseUrl + mangaName, end="")
     browser = webdriver.Firefox()
     browser.get(baseUrl + mangaName)  # handle exceptions here
-    time.sleep(15)
-
+    time.sleep(15) # kissmanaga takes time to load (browser check) - give it time 
+    print(" - Done")
     # Find the URL of the comic image.
     comicElem = browser.find_element_by_css_selector("#divImage")
     eles = comicElem.find_elements_by_css_selector("*")
@@ -54,9 +54,14 @@ def downloadManga(mangaName, create_pdf, create_cbz):
     dl_file_list = [i for i in os.listdir(".") if i.endswith(".jpg")]
     with open(base_filename + ".pdf", "wb") as f:
         f.write(img2pdf.convert(dl_file_list))
+    browser.quit() # The program is done, close the web browser.
     print("Done")
 
-
-name = input("Enter manga name and chapter no. in kissmanga format: ")
 # eg - Hajime-no-Ippo/Ch-1239----In-His-Hand
-downloadManga(name, False, False)
+name = input("Enter manga name and chapter no. in kissmanga format: ")
+mk_pdf = input("Create PDF? [Y/n]").strip().lower().startswith("y")
+mk_cbz = input("Create CBZ? [Y/n]").strip().lower().startswith("y")
+if not mk_cbz and not mk_pdf:
+    print("You must create some type of file, defaulting to PDF")
+    mk_pdf = True
+downloadManga(name, mk_pdf, mk_cbz)
