@@ -23,7 +23,8 @@ def downloadManga(mangaName):
         print('Could not find comic images.')
     else:
         j=1
-        k='a'
+        base_filename = mangaName.split("/")[0]
+        k=1
         for i in eles:
             if(j == (len(eles)/2)+1):
                 break
@@ -33,8 +34,8 @@ def downloadManga(mangaName):
             print('Downloading image %s...' % (comicUrl))
             res = requests.get(comicUrl)
             res.raise_for_status()
-            imageFile = open(os.path.join(mangaName.split('/')[0], os.path.basename(k+'.jpg')),'wb')
-            k = chr(ord(k) + 1)
+            imageFile = open(os.path.join(mangaName.split('/')[0], os.path.basename(base_filename + "_" + str(k) + '.jpg')),'wb')
+            k += 1
             for chunk in res.iter_content(100000):
                 imageFile.write(chunk)
             imageFile.close()
