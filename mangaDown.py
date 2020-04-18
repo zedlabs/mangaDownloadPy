@@ -63,11 +63,12 @@ def downloadManga(mangaName, create_pdf, create_cbz):
     print("Done")
 
 
-# eg - Hajime-no-Ippo/Ch-1239----In-His-Hand
-name = input("Enter manga name and chapter no. in kissmanga format: ")
-mk_pdf = input("Create PDF? [y/n] ").strip().lower().startswith("y")
-mk_cbz = input("Create CBZ? [y/n] ").strip().lower().startswith("y")
-if not mk_cbz and not mk_pdf:
-    print("You must create some type of file, defaulting to PDF")
-    mk_pdf = True
-downloadManga(name, mk_pdf, mk_cbz)
+if __name__ == "__main__":
+    # eg - Hajime-no-Ippo/Ch-1239----In-His-Hand
+    name = input("Enter manga name and chapter no. in kissmanga format: ")
+    mk_pdf = input("Create PDF? [y/n] ").strip().lower().startswith("y")
+    mk_cbz = input("Create CBZ? [y/n] ").strip().lower().startswith("y")
+    if not mk_cbz and not mk_pdf:
+        print("You must create some type of file, defaulting to PDF")
+        mk_pdf = True
+    downloadManga(name, mk_pdf, mk_cbz)
