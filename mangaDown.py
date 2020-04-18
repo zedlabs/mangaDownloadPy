@@ -56,7 +56,9 @@ def downloadManga(mangaName, create_pdf, create_cbz):
         with open(base_filename + ".pdf", "wb") as f:
             f.write(img2pdf.convert(dl_file_list))
     if create_cbz:
-        pass
+        with zipfile.ZipFile(base_filename + ".cbz", "w") as cbz_file:
+            for manga_page in dl_file_list:
+                cbz_file.write(manga_page)
     browser.quit()  # The program is done, close the web browser.
     print("Done")
 
