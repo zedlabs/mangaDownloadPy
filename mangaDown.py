@@ -7,8 +7,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
 from wand.image import Image
-# pip install wand
-# Have to install ImageMagick from here if on Windows: http://docs.wand-py.org/en/latest/guide/install.html#install-imagemagick-on-windows
+# Have to install ImageMagick for transparency issues - Windows: http://docs.wand-py.org/en/latest/guide/install.html#install-imagemagick-on-windows
 
 
 # Inverts the Chapter List from 1 - X
