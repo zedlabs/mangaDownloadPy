@@ -94,7 +94,7 @@ def downloadManga(manga, manga_name, chapter_name, create_pdf, create_cbz):
             except img2pdf.AlphaChannelError:
                 print("Alpha Channel Error - Converting images to remove alpha channel")
                 for transparent_images in dl_file_list:
-                    converted_name = transparent_images.replace('.jpg', '')+'_converted.jpg'
+                    converted_name = transparent_images.replace('.jpg', '_converted.jpg')
                     with Image(filename=transparent_images) as img:
                         img.alpha_channel = 'remove'
                         img.save(filename=converted_name)
