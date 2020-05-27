@@ -1,10 +1,10 @@
 # mangaDownloadPy
-
 manga downloading script uses kissmanga as source.
 
-needs selenium, gecko driver to run.
+needs selenium, gecko driver, bs4, wand, and imagemagick installed to work
+Selenium & Gecko Driver - Opens the website with a headless firefox process
+bs4 (Beautiful Soup) - Scrapes the page for table data
+wand & imagemagick - fixes the transparency issues with img2pdf
 
-Downloads as indivisual pages as well as a combined chapter .pdf or .cdz in the current working directory
-
-input as kissmanga format eg- *One-Piece/One-Piece---779*, *Hajime-no-Ippo/Ch-1239----In-His-Hand* (query in the url)
-
+Input the manga title first, ex: "Demon Slayer" and then select the correct manga with numbers.
+Once the series is selected, pick the chapter you want to install and which file type you would like to use.
