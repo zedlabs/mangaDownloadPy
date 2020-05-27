@@ -9,6 +9,17 @@ from bs4 import BeautifulSoup
 from wand.image import Image
 # Have to install ImageMagick for transparency issues - Windows: http://docs.wand-py.org/en/latest/guide/install.html#install-imagemagick-on-windows
 
+# Use Colors for numbering (if you want).  They're commented out below
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 
 # Inverts the Chapter List from 1 - X
 def invert_list(input_list):
@@ -141,6 +152,9 @@ if __name__ == "__main__":
     titles = 0
     series_max = len(Series_Name)
     while titles < series_max:
+        # Colored Numbers
+        #print(f'{bcolors.OKBLUE}{titles + 1}{bcolors.ENDC}. {Series_Name[titles]}')
+        # Non-colored Numbers
         print(titles + 1, '. ', Series_Name[titles], sep='')
         titles += 1
         # Add a check later to print only X amount of titles
@@ -189,6 +203,9 @@ if __name__ == "__main__":
     chaps = 0
     chapter_max = len(Chapter_Names)
     while chaps < chapter_max:
+        # Colored Numbers
+        #print(f'{bcolors.OKGREEN}{chaps + 1}{bcolors.ENDC}. {Chapter_Names[chaps]}')
+        # Non-colored Numbers
         print(chaps + 1, '. ', Chapter_Names[chaps], sep='')
         chaps += 1
 
