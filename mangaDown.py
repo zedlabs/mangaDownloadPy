@@ -22,14 +22,20 @@ def downloadManga(manga, manga_name, chapter_name, create_pdf, create_cbz):
     os.chdir("manga")
 
     # Create the Series Directory
-    manga_name = manga_name.replace("/", "-").replace('\\', '-')
-    chapter_name = chapter_name.replace('/', '-').replace('\\', '-')
+    manga_name = manga_name.replace("/", "-").replace('\\', '-').replace('?', '').replace('>', '').replace('<', '').replace(':', '').replace('*', '').replace('|', '').replace('\"', '')
+    chapter_name = chapter_name.replace('/', '-').replace('\\', '-').replace('?', '').replace('>', '').replace('<', '').replace(':', '').replace('*', '').replace('|', '').replace('\"', '')
     base_filename = manga_name
     os.makedirs(manga_name, exist_ok=True)
 
     # Download the page.
     print("Loading the Page...")
     browser.get(manga)
+    time.sleep(3)
+    print(browser.current_url)
+    while '/Special/AreYouHuman' in browser.current_url:
+        print('Bypassing Captcha...')
+        browser.get(manga)
+        time.sleep(3)
 
     # Find the URL of the comic image.
     print("Retrieving Images...")
