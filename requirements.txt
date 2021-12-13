@@ -1,6 +1,6 @@
 beautifulsoup4==4.9.1
 img2pdf==0.3.6
-lxml==4.6.3
+lxml==4.6.5
 requests==2.23.0
 selenium==3.141.0
 Wand==0.6.1
