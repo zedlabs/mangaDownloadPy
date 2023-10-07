@@ -1,4 +1,5 @@
 # mangaDownloadPy
+[NOT ACTIVELY MAINTAINED]
 > manga downloading script, which uses kissmanga as the source.
 
 Please review ___requirements.txt___ for the required python libraries.
